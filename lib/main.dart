@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:notefear/main_screan.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -17,7 +18,7 @@ Future<void> main() async {
     MaterialApp(
       theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
-      home: TakePictureScreen(
+      home: MainScreen(
         // Pass the appropriate camera to the TakePictureScreen widget.
         camera: firstCamera,
       ),

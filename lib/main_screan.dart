@@ -1,7 +1,10 @@
+import 'package:camera_platform_interface/src/types/camera_description.dart';
 import 'package:flutter/material.dart';
+import 'package:notefear/main.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  final CameraDescription camera;
+  const MainScreen({Key? key, required  this.camera}) : super(key: key);
   @override
   Widget build(BuildContext context){
     List icon=[
@@ -25,11 +28,13 @@ class MainScreen extends StatelessWidget {
                   // Sounds.start(StaticVar().homeBadgeSound[index]);
                 },
                 onTap: (){
-                  // Navigator.of(context).push(
-                  //     MaterialPageRoute(
-                  //       builder: (context) =>const TextToVoice() ,
-                  //     )
-                  // );
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => TakePictureScreen(
+                          camera: camera,
+                        ) ,
+                      )
+                  );
                 },
                 child: Center(
                   child: Container(
