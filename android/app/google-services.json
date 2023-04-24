@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "146502102456",
+    "project_id": "notefear",
+    "storage_bucket": "notefear.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146502102456:android:c58ddc4d14a35bc0a4b34d",
+        "android_client_info": {
+          "package_name": "com.example.notefear"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "146502102456-3dm8cf4gdp2gi82mqdfdgtdvf6r2874t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUJVDceeytgD_7lLucvp9QP1kFlE9NmNk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "146502102456-3dm8cf4gdp2gi82mqdfdgtdvf6r2874t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

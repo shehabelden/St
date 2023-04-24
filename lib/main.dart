@@ -3,14 +3,17 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:notefear/main_screan.dart';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:tflite/tflite.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 int total = 0;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   final cameras = await availableCameras();
   final firstCamera = cameras.first;
 
@@ -103,12 +106,12 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
 
                       // Construct the path where the image should be saved using the
                       // pattern package.
-                  //    final path = join(
-                        // Store the picture in the temp directory.
-                        // Find the temp directory using the `path_provider` plugin.
-                    //    (await getTemporaryDirectory()).path,
-                   //     '${DateTime.now()}.png',
-                   //   );
+                      //    final path = join(
+                      // Store the picture in the temp directory.
+                      // Find the temp directory using the `path_provider` plugin.
+                      //    (await getTemporaryDirectory()).path,
+                      //     '${DateTime.now()}.png',
+                      //   );
 
                       // Attempt to take a picture and log where it's been saved.
                       final  path=await _controller.takePicture();
@@ -184,50 +187,68 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
     FlutterTts flutterTts;
     flutterTts = new FlutterTts();
 
-    if (outputMoney == "50 rupees") {
+    if (outputMoney == "عشرين جنيها") {
       String tot = totalMoney.toString();
       print(tot);
-      String speakString = "Fifty rupees, Your total is now rupees, $tot";
+      String speakString = "20 pounds, Your total is now pounds, $tot";
       await flutterTts.setSpeechRate(0.8);
       await flutterTts.awaitSpeakCompletion(true);
       await flutterTts.speak(speakString);
     }
-    if (outputMoney == "100 rupees") {
+    if (outputMoney == "عشرة جنيهات") {
       String tot = totalMoney.toString();
       print(tot);
-      String speakString = "One Hundred rupees, Your total is now rupees, $tot";
+      String speakString = "10 pounds, Your total is now pounds, $tot";
       await flutterTts.setSpeechRate(0.8);
       await flutterTts.awaitSpeakCompletion(true);
       await flutterTts.speak(speakString);
     }
-    if (outputMoney == "200 rupees") {
+    if (outputMoney == "خمسة جنيهات") {
       String tot = totalMoney.toString();
       print(tot);
-      String speakString = "Two Hundred rupees, Your total is now rupees, $tot";
+      String speakString = "5 pounds, Your total is now rupees, $tot";
       await flutterTts.setSpeechRate(0.8);
       await flutterTts.awaitSpeakCompletion(true);
       await flutterTts.speak(speakString);
     }
-    if (outputMoney == "500 rupees") {
+    if (outputMoney == "جنيه واحد") {
       String tot = totalMoney.toString();
       print(tot);
       String speakString =
-          "Five Hundred rupees, Your total is now rupees, $tot";
+          "1 pounds, Your total is now pounds, $tot";
       await flutterTts.setSpeechRate(0.8);
       await flutterTts.awaitSpeakCompletion(true);
       await flutterTts.speak(speakString);
     }
-    if (outputMoney == "2000 rupees") {
+    if (outputMoney == "خمسون جنيها") {
       String tot = totalMoney.toString();
       print(tot);
       String speakString =
-          "Two thousand rupees, Your total is now rupees, $tot";
+          "50 pounds, Your total is now pounds, $tot";
+      await flutterTts.setSpeechRate(0.8);
+      await flutterTts.awaitSpeakCompletion(true);
+      await flutterTts.speak(speakString);
+    }
+    if (outputMoney == "مائة جنيه") {
+      String tot = totalMoney.toString();
+      print(tot);
+      String speakString =
+          "100 pounds, Your total is now pounds, $tot";
+      await flutterTts.setSpeechRate(0.8);
+      await flutterTts.awaitSpeakCompletion(true);
+      await flutterTts.speak(speakString);
+    }
+
+    if (outputMoney == "ماتين جنيه") {
+      String tot = totalMoney.toString();
+      print(tot);
+      String speakString =
+          "200 pounds, Your total is now pounds, $tot";
       await flutterTts.setSpeechRate(0.8);
       await flutterTts.awaitSpeakCompletion(true);
       await flutterTts.speak(speakString);
     }
   }
-
   classifyImage(String image) async {
     var output = await Tflite.runModelOnImage(
       path: image,
@@ -236,37 +257,45 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
       imageMean: 127.5,
       imageStd: 127.5,
     );
-print(output);
+    print(output);
     op = output;
 
     if (op != null) {
-      if (op![0]["label"] == "50 rupees") {
+      if (op![0]["label"] == "جنيه واحد") {
         total += 50;
-        runTextToSpeech("50 rupees", total);
+        runTextToSpeech("جنيه واحد", total);
       }
-      if (op![0]["label"] == "100 rupees") {
+      if (op![0]["label"] == "خمسة جنيهات") {
         total += 100;
-        runTextToSpeech("100 rupees", total);
+        runTextToSpeech("خمسة جنيهات", total);
       }
-      if (op![0]["label"] == "200 rupees") {
+      if (op![0]["label"] == "عشرة جنيهات") {
         total += 200;
-        runTextToSpeech("200 rupees", total);
+        runTextToSpeech("عشرة جنيهات", total);
       }
-      if (op![0]["label"] == "500 rupees") {
+      if (op![0]["label"] == "عشرين جنيها") {
         total += 500;
-        runTextToSpeech("500 rupees", total);
+        runTextToSpeech("عشرين جنيها", total);
+      }
+      if (op![0]["label"] == "خمسون جنيها") {
+        total += 2000;
+        runTextToSpeech("خمسون جنيها", total);
+      }
+      if (op![0]["label"] == "مائة جنيه") {
+        total += 2000;
+        runTextToSpeech("مائة جنيه", total);
+      }
+      if (op![0]["label"] == "ماتين جنيه") {
+        total += 2000;
+        runTextToSpeech("ماتين جنيه", total);
       }
 
-      if (op![0]["label"] == "2000 rupees") {
-        total += 2000;
-        runTextToSpeech("2000 rupees", total);
-      }
     } else
       runTextToSpeech("No note found", total);
   }
   loadModel() async {
     await Tflite.loadModel(
-        model: "assets/model_unquant.tflite", labels: "assets/labels.txt");
+        model: "assets/model.tflite", labels: "assets/labels.txt");
   }
   @override
   void dispose() {

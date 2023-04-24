@@ -7,6 +7,11 @@ class MainScreen extends StatelessWidget {
   const MainScreen({Key? key, required  this.camera}) : super(key: key);
   @override
   Widget build(BuildContext context){
+    List label=[
+      "label one",
+      "",
+      ""
+    ];
     List icon=[
       Icons.volume_down,
       Icons.camera_alt,
@@ -14,19 +19,20 @@ class MainScreen extends StatelessWidget {
     ];
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white30,
+        backgroundColor: Colors.white,
         elevation: 0,
       ),
+      backgroundColor: Colors.white,
       body:ListView.builder(
           itemCount:3,
           physics:const NeverScrollableScrollPhysics(),
           itemBuilder: (c,index){
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                onPanStart: (p){
-                  // Sounds.start(StaticVar().homeBadgeSound[index]);
-                },
+              // Semantics put the texet needed on talk back on label,
+              child: Semantics(
+                button: true,
+                label: label[index],
                 onTap: (){
                   Navigator.of(context).push(
                       MaterialPageRoute(
@@ -42,7 +48,7 @@ class MainScreen extends StatelessWidget {
                     width: 200,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
+                      color: Colors.grey.shade400,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
                         color: Colors.grey.shade900,

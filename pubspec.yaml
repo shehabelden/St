@@ -40,7 +40,9 @@ dependencies:
   path_provider:
   path:
   flutter_tts:
-
+  firebase_core:
+  cloud_firestore:
+  firebase_auth:
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -58,8 +60,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/labels.txt
-    - assets/model_unquant.tflite
+    - assets/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
